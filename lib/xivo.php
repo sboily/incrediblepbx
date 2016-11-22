@@ -84,6 +84,16 @@ class XiVO {
         header('Location: index.php');
     }
 
+    public function list_users() {
+        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $users = $connect->get("users");
+
+        if ($users->info->http_code == 200) {
+            return json_decode($users->response);
+        }
+        return "Error to get users";
+    }
+
 }
 
 ?>

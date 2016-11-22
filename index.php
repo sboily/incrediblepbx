@@ -31,6 +31,9 @@ if (!empty($session)) {
     $tpl->assign("displayname", "Incredible root");
     $tpl->assign("uuid", $session);
 
+    $users = $xivo->list_users();
+    $tpl->assign("users", $users->items);
+
     switch($_GET['action']) {
         case 'logout':
             $xivo->xivo_logout();
