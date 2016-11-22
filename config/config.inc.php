@@ -2,6 +2,7 @@
 
 $title = "Incredible PBX";
 $sub_title = "Welcome to Incredible PBX";
+$root_application = "/incrediblepbx";
 
 $xivo_host = "127.0.0.1";
 $xivo_backend_user = "xivo_admin";
