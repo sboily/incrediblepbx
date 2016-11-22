@@ -4,7 +4,6 @@ MAINTAINER Sylvain Boily <sboily@proformatique.com>
 
 RUN apt-get update && apt-get install -y \
         smarty3 \
-        php5-pgsql \
         php5-curl
  
 RUN rm -rf /var/www/html/*
