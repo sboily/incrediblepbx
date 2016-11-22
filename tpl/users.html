@@ -1,0 +1,18 @@
+{extends file="tpl/layout.html"}
+
+{block name=result}
+
+  <table>
+    {foreach from=$users item=entry}
+      <tr>
+        <td>{$entry->firstname}</td>
+        <td>{$entry->lastname}</td>
+        <td>{$entry->email}</td>
+      </tr>
+    {/foreach}
+  </table>
+
+{/block}
+
+{block name=js_script}
+{/block}

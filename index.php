@@ -27,21 +27,23 @@ if ($_POST) {
 $session = isset($_COOKIE['asteridex']['session']) ? $_COOKIE['asteridex']['session'] : "";
 
 if (!empty($session)) {
-
     $tpl->assign("displayname", "Incredible root");
     $tpl->assign("uuid", $session);
 
-    $users = $xivo->list_users();
-    $tpl->assign("users", $users->items);
-
     switch($_GET['action']) {
+        case 'users':
+            $users = $xivo->list_users();
+            $tpl->assign("users", $users->items);
+            $tpl->display("tpl/users.html");
+            break;
+
         case 'logout':
             $xivo->xivo_logout();
             break;
+
+        default:
+            $tpl->display("tpl/home.html");
     }
-
-    $tpl->display("tpl/home.html");
-
 
 } else {
 
