@@ -2,30 +2,24 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<title>{$title}</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<style type="text/css" media="screen">@import "css/basic.css";</style>
+  <title>{$title}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <style type="text/css" media="screen">@import "css/bootstrap.min.css";</style>
+  <style type="text/css" media="screen">@import "css/incrediblepbx.css";</style>
 </head>
 
 <body>
-  <h1>{$title}</h1>
-
-  {$displayname} (<a href="index.php?action=logout">logout</a>) 
-  <a href="index.php">Home</a>
-
-  <div id="header">
-  </div>
-
-  <div id="main">
-    <div id="contents">
-      <h2>{$uuid}</h2>
+  {include file='tpl/nav.html'}
+  <div class="container-fluid">
+    <div class="row">
+      {include file='tpl/menu.html'}
       {block name=result}There is no result!{/block}
     </div>
   </div>
-
 </body>
 
   <script>
+    <script src="js/bootstrap.min.js"></script>
     {block name=js_script}{/block}
   </script>
 
