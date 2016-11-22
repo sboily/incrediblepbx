@@ -1,0 +1,35 @@
+{extends file="tpl/layout.html"}
+
+{block name=result}
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="sub-header">CDR</h2>
+    <div class="table-responsive">
+      <table class="table table-striped"> 
+        <thead> 
+          <tr> 
+            <th>Call Date</th> 
+            <th>Caller</th> 
+            <th>Called</th> 
+            <th>Duration</th> 
+            <th>User Field</th> 
+          </tr> 
+        </thead> 
+        <tbody> 
+        {foreach from=$cdrs item=entry}
+          {if $entry@first}{continue}{/if} 
+          <tr>
+            <td>{$entry[0]}</td>
+            <td>{$entry[1]}</td>
+            <td>{$entry[2]}</td>
+            <td>{$entry[3]}</td>
+            <td>{$entry[4]}</td>
+          </tr>
+        {/foreach}
+        </tbody> 
+      </table> 
+    </div> 
+  </div> 
+{/block}
+
+{block name=js_script}
+{/block}

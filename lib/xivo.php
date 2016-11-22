@@ -94,6 +94,16 @@ class XiVO {
         return "Error to get users";
     }
 
+    public function get_cdr() {
+        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $cdrs = $connect->get("call_logs");
+
+        if ($cdrs->info->http_code == 200) {
+            return $cdrs->response;
+        }
+        return "Error to get cdrs";
+    }
+
 }
 
 ?>

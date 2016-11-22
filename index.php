@@ -34,7 +34,14 @@ if (!empty($session)) {
         case 'users':
             $users = $xivo->list_users();
             $tpl->assign("users", $users->items);
+            $tpl->assign("nav", "users");
             $tpl->display("tpl/users.html");
+            break;
+
+        case 'cdrs':
+            $tpl->assign("cdrs", array_map('str_getcsv', str_getcsv($xivo->get_cdr(), "\n")));
+            $tpl->assign("nav", "cdrs");
+            $tpl->display("tpl/cdrs.html");
             break;
 
         case 'logout':
