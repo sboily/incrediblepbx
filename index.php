@@ -29,6 +29,7 @@ $session = isset($_COOKIE['asteridex']['session']) ? $_COOKIE['asteridex']['sess
 if (!empty($session)) {
     $tpl->assign("displayname", "Incredible root");
     $tpl->assign("uuid", $session);
+    $tpl->assign("root_application", $root_application);
 
     $action = '';
     if ($_GET['action']) {
