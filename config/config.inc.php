@@ -3,7 +3,7 @@
 $title = "Incredible PBX";
 $sub_title = "Welcome to Incredible PBX";
 
-$xivo_host = "10.41.0.2";
+$xivo_host = "127.0.0.1";
 $xivo_backend_user = "xivo_admin";
 
 $xivo_host = false !== getenv('XIVO_HOST') ? getenv('XIVO_HOST') : $xivo_host;
