@@ -30,17 +30,20 @@ if (!empty($session)) {
     $tpl->assign("displayname", "Incredible root");
     $tpl->assign("uuid", $session);
 
-    switch($_GET['action']) {
+    $action = '';
+    if ($_GET['action']) {
+       $action = $_GET['action'];
+       $tpl->assign("nav", $action);
+    }
+
+    switch($action) {
         case 'users':
-            $users = $xivo->list_users();
-            $tpl->assign("users", $users->items);
-            $tpl->assign("nav", "users");
+            $tpl->assign("users", $xivo->list_users()->items);
             $tpl->display("tpl/users.html");
             break;
 
         case 'cdrs':
             $tpl->assign("cdrs", array_map('str_getcsv', str_getcsv($xivo->get_cdr(), "\n")));
-            $tpl->assign("nav", "cdrs");
             $tpl->display("tpl/cdrs.html");
             break;
 
