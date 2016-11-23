@@ -1,6 +1,8 @@
 <div class="col-sm-3 col-md-2 sidebar">
   <ul class="nav nav-sidebar">
-    <li {if $nav == "users"} class="active" {/if}><a href="{$root_application}/?action=users">List users</a></li>
+    <li {if $nav == "users"} class="active" {/if}><a href="{$root_application}/?action=users">Users</a></li>
+    <li {if $nav == "lines"} class="active" {/if}><a href="{$root_application}/?action=lines">Lines</a></li>
+    <li {if $nav == "trunks"} class="active" {/if}><a href="{$root_application}/?action=trunks">Trunks</a></li>
     <li {if $nav == "cdrs"} class="active" {/if}><a href="{$root_application}/?action=cdrs">CDR</a></li>
   </ul>
 </div>

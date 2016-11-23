@@ -2,22 +2,22 @@
 
 {block name=result}
   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h2 class="sub-header">Users</h2>
+    <h2 class="sub-header">Trunks</h2>
     <div class="table-responsive"> 
       <table class="table table-striped"> 
         <thead> 
           <tr> 
-            <th>Firstname</th> 
-            <th>Lastname</th> 
-            <th>Email</th> 
+            <th>ID</th> 
+            <th>Context</th> 
+            <th>Endpoint</th> 
           </tr> 
         </thead> 
         <tbody> 
-        {foreach from=$users item=entry}
+        {foreach from=$trunks item=entry}
           <tr>
-            <td>{$entry->firstname}</td>
-            <td>{$entry->lastname}</td>
-            <td>{$entry->email}</td>
+            <td>{$entry->id}</td>
+            <td>{$entry->context}</td>
+            <td>{$entry->endpoint_sip->username}</td>
           </tr>
         {/foreach}
         </tbody> 

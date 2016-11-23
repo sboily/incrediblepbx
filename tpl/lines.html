@@ -1,0 +1,40 @@
+{extends file="tpl/layout.html"}
+
+{block name=result}
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="sub-header">Lines</h2>
+    <div class="table-responsive"> 
+      <table class="table table-striped"> 
+        <thead> 
+          <tr> 
+            <th>Line</th> 
+            <th>CID Name</th> 
+            <th>CID Number</th> 
+            <th>Extension??</th> 
+            <th>Password??</th> 
+            <th>SIP ID</th> 
+          </tr> 
+        </thead> 
+        <tbody> 
+        {foreach from=$lines item=entry}
+          <tr>
+            <td>{$entry->name}</td>
+            <td>{$entry->caller_id_name}</td>
+            <td>{$entry->caller_id_num}</td>
+            <td>
+              {foreach from=$entry->extensions  item=e}
+                {$e->exten}
+              {/foreach}
+            </td>
+            <td>{$entry->sip->secret}</td>
+            <td>{$entry->endpoint_sip->id}</td>
+          </tr>
+        {/foreach}
+        </tbody> 
+      </table> 
+    </div> 
+  </div> 
+{/block}
+
+{block name=js_script}
+{/block}

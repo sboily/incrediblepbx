@@ -48,6 +48,25 @@ if (!empty($session)) {
             $tpl->display("tpl/cdrs.html");
             break;
 
+        case 'trunks':
+            $tpl->assign("trunks", $xivo->list_trunks()->items);
+            $tpl->display("tpl/trunks.html");
+            break;
+
+        case 'lines':
+            $lines = $xivo->list_lines()->items;
+            $array_endpoint = array();
+
+            foreach($lines as $key => $line) {
+                $sip = $xivo->get_endpoint_sip($line->id);
+                $line->sip = $sip;
+                array_push($array_endpoint, $line);
+            }
+
+            $tpl->assign("lines", $array_endpoint);
+            $tpl->display("tpl/lines.html");
+            break;
+
         case 'logout':
             $xivo->xivo_logout();
             break;

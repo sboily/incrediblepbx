@@ -94,6 +94,36 @@ class XiVO {
         return "Error to get users";
     }
 
+    public function list_trunks() {
+        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $trunks = $connect->get("trunks");
+
+        if ($trunks->info->http_code == 200) {
+            return json_decode($trunks->response);
+        }
+        return "Error to get trunks";
+    }
+
+    public function list_lines() {
+        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $lines = $connect->get("lines");
+
+        if ($lines->info->http_code == 200) {
+            return json_decode($lines->response);
+        }
+        return "Error to get lines";
+    }
+
+    public function get_endpoint_sip($id) {
+        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $endpoint_sip = $connect->get("endpoints/sip/{$id}");
+
+        if ($endpoint_sip->info->http_code == 200) {
+            return json_decode($endpoint_sip->response);
+        }
+        return "Error to get endpoint_sip";
+    }
+
     public function get_cdr() {
         $connect = $this->_connect(9486, "1.1", $this->xivo_session);
         $cdrs = $connect->get("call_logs");
