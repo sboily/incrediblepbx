@@ -1,6 +1,6 @@
 from php:5.6-fpm
 
-MAINTAINER Sylvain Boily <sboily@proformatique.com>
+MAINTAINER Sylvain Boily <sylvainboilydroid@gmail.com>
 
 RUN apt-get update && apt-get install -y \
         smarty3 \
