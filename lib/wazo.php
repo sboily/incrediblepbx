@@ -14,7 +14,7 @@ class Wazo {
     function __construct($wazo_host) {
         $this->wazo_host = $wazo_host;
         $this->backend_user = "xivo_user";
-        $this->wazo_session = $_COOKIE['asteridex']['session'];
+        $this->wazo_session = isset($_COOKIE['wazo']['session']) ? $_COOKIE['wazo']['session'] : NULL;
         $this->wazo_uuid = $this->_get_uuid();
     }
 
@@ -78,8 +78,8 @@ class Wazo {
         $connect = $this->_connect(9497, "0.1");
         $connect->delete("token/$this->wazo_session");
 
-        setcookie("asteridex[session]", "", time() - 3600);
-        setcookie("asteridex[uuid]", "", time() - 3600);
+        setcookie("wazo[session]", "", time() - 3600);
+        setcookie("wazo[uuid]", "", time() - 3600);
 
         header('Location: index.php');
     }

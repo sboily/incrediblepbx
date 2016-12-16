@@ -19,12 +19,12 @@ $tpl->assign("title", $title);
 if ($_POST) {
     $session = $wazo->login($_POST['username'], $_POST['password']);
     if ($session) {
-        setcookie("asteridex[session]", $session, time() + 3600);
+        setcookie("wazo[session]", $session, time() + 3600);
         header('Location: index.php');
     }
 }
 
-$session = isset($_COOKIE['asteridex']['session']) ? $_COOKIE['asteridex']['session'] : "";
+$session = isset($_COOKIE['wazo']['session']) ? $_COOKIE['wazo']['session'] : "";
 
 if (!empty($session)) {
     $tpl->assign("displayname", "Incredible root");
