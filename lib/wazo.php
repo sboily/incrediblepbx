@@ -9,18 +9,18 @@
 include_once("restclient.php");
 
 
-class XiVO {
+class Wazo {
 
-    function __construct($xivo_host) {
-        $this->xivo_host = $xivo_host;
-        $this->xivo_backend_user = "xivo_user";
-        $this->xivo_session = $_COOKIE['asteridex']['session'];
-        $this->xivo_uuid = $this->_get_uuid();
+    function __construct($wazo_host) {
+        $this->wazo_host = $wazo_host;
+        $this->backend_user = "xivo_user";
+        $this->wazo_session = $_COOKIE['asteridex']['session'];
+        $this->wazo_uuid = $this->_get_uuid();
     }
 
     private function _connect($port, $version, $token=NULL, $login=NULL, $password=NULL) {
         $connect = new RestClient([
-            'base_url' => "https://$this->xivo_host:$port/$version",
+            'base_url' => "https://$this->wazo_host:$port/$version",
             'headers' => ['X-Auth-Token' => $token],
             'curl_options' => [CURLOPT_SSL_VERIFYPEER => false,
                                CURLOPT_SSL_VERIFYHOST => false,
@@ -36,15 +36,15 @@ class XiVO {
     }
 
     private function _get_uuid() {
-        if (empty($this->xivo_session)) {
+        if (empty($this->wazo_session)) {
             return false;
         }
 
-        $connect = $this->_connect(9497, "0.1", $this->xivo_session);
-        $uuid = $connect->get("token/$this->xivo_session");
+        $connect = $this->_connect(9497, "0.1", $this->wazo_session);
+        $uuid = $connect->get("token/$this->wazo_session");
 
         if ($uuid->info->http_code == 200) {
-            return json_decode($uuid->response)->data->xivo_user_uuid; 
+            return json_decode($uuid->response)->data->wazo_user_uuid; 
         }
 
         return false;
@@ -60,7 +60,7 @@ class XiVO {
 
         if ($t->info->http_code == 200) {
             $info['token'] = json_decode($t->response)->data->token;
-            $info['uuid'] = json_decode($t->response)->data->xivo_user_uuid;
+            $info['uuid'] = json_decode($t->response)->data->wazo_user_uuid;
 
             return $info;
         }
@@ -68,15 +68,15 @@ class XiVO {
         return false;
     }
 
-    public function xivo_login($login, $password) {
-        $info = $this->_get_token($login, $password, $this->xivo_backend_user);
+    public function login($login, $password) {
+        $info = $this->_get_token($login, $password, $this->backend_user);
 
         return $info['token'];
     }
 
-    public function xivo_logout() {
+    public function logout() {
         $connect = $this->_connect(9497, "0.1");
-        $connect->delete("token/$this->xivo_session");
+        $connect->delete("token/$this->wazo_session");
 
         setcookie("asteridex[session]", "", time() - 3600);
         setcookie("asteridex[uuid]", "", time() - 3600);
@@ -85,7 +85,7 @@ class XiVO {
     }
 
     public function list_users() {
-        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $connect = $this->_connect(9486, "1.1", $this->wazo_session);
         $users = $connect->get("users");
 
         if ($users->info->http_code == 200) {
@@ -95,7 +95,7 @@ class XiVO {
     }
 
     public function list_trunks() {
-        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $connect = $this->_connect(9486, "1.1", $this->wazo_session);
         $trunks = $connect->get("trunks");
 
         if ($trunks->info->http_code == 200) {
@@ -105,7 +105,7 @@ class XiVO {
     }
 
     public function list_lines() {
-        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $connect = $this->_connect(9486, "1.1", $this->wazo_session);
         $lines = $connect->get("lines");
 
         if ($lines->info->http_code == 200) {
@@ -115,7 +115,7 @@ class XiVO {
     }
 
     public function get_endpoint_sip($id) {
-        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $connect = $this->_connect(9486, "1.1", $this->wazo_session);
         $endpoint_sip = $connect->get("endpoints/sip/{$id}");
 
         if ($endpoint_sip->info->http_code == 200) {
@@ -125,7 +125,7 @@ class XiVO {
     }
 
     public function get_cdr() {
-        $connect = $this->_connect(9486, "1.1", $this->xivo_session);
+        $connect = $this->_connect(9486, "1.1", $this->wazo_session);
         $cdrs = $connect->get("call_logs");
 
         if ($cdrs->info->http_code == 200) {
