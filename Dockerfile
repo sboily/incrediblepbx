@@ -1,10 +1,15 @@
-from php:5.6-fpm
+from php:7.4-apache
 
-MAINTAINER Sylvain Boily <sylvainboilydroid@gmail.com>
+MAINTAINER Sylvain Boily <sylvain@wazo.io>
 
-RUN apt-get update && apt-get install -y \
-        smarty3 \
-        php5-curl
+RUN apt update && apt -y dist-upgrade && apt install -y \
+        wget
+
+WORKDIR /usr/src
+RUN wget https://github.com/smarty-php/smarty/archive/refs/tags/v4.1.0.tar.gz
+RUN tar xfvz v4.1.0.tar.gz
+RUN mkdir /usr/local/lib/php/Smarty
+RUN cp -r smarty-4.1.0/libs/* /usr/local/lib/php/Smarty
  
 RUN rm -rf /var/www/html/*
 COPY . /var/www/html/

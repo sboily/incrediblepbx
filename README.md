@@ -19,10 +19,12 @@ You can use docker
 It's possible to import all of this variable
 
 - WAZO_HOST
+- WAZO_PORT
 - WAZO_BACKEND_USER
 
 ```
     docker run -p 80:80 -e WAZO_HOST=192.168.1.124 \
-                        -e WAZO_BACKEND_USER=xivo_admin \
+                        -e WAZO_PORT=443 \
+                        -e WAZO_BACKEND_USER=wazo_user \
                         -t incrediblepbx
 ```

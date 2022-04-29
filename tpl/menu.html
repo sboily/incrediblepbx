@@ -1,8 +1,14 @@
 <div class="col-sm-3 col-md-2 sidebar">
-  <ul class="nav nav-sidebar">
-    <li {if $nav == "users"} class="active" {/if}><a href="{$root_application}/?action=users">Users</a></li>
-    <li {if $nav == "lines"} class="active" {/if}><a href="{$root_application}/?action=lines">Lines</a></li>
-    <li {if $nav == "trunks"} class="active" {/if}><a href="{$root_application}/?action=trunks">Trunks</a></li>
-    <li {if $nav == "cdrs"} class="active" {/if}><a href="{$root_application}/?action=cdrs">CDR</a></li>
-  </ul>
+  {html_options name=tenants options=$tenants selected=$tenant_uuid onchange="chooseTenant(this.value);"}
+  <hr>
+  {if $tenant_uuid}
+    <ul class="nav nav-sidebar">
+      <li {if $nav == "users"} class="active" {/if}><a href="{$root_application}/?action=users">Users</a></li>
+      <li {if $nav == "lines"} class="active" {/if}><a href="{$root_application}/?action=lines">Lines</a></li>
+      <li {if $nav == "trunks"} class="active" {/if}><a href="{$root_application}/?action=trunks">Trunks</a></li>
+      <li {if $nav == "cdrs"} class="active" {/if}><a href="{$root_application}/?action=cdrs">CDR</a></li>
+    </ul>
+  {else}
+    <span>Please choose a tenant!</span>
+  {/if}
 </div>

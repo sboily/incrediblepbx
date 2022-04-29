@@ -16,13 +16,12 @@
         </thead> 
         <tbody> 
         {foreach from=$cdrs item=entry}
-          {if $entry@first}{continue}{/if} 
           <tr>
-            <td>{$entry[0]}</td>
-            <td>{$entry[1]}</td>
-            <td>{$entry[2]}</td>
-            <td>{$entry[3]}</td>
-            <td>{$entry[4]}</td>
+            <td>{$entry->start}</td>
+	    <td>{$entry->source_name}</td>
+	    <td>{$entry->requested_extension}</td>
+	    <td>{$entry->duration}</td>
+	    <td>{$entry->tags}</td>
           </tr>
         {/foreach}
         </tbody> 

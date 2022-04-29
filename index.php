@@ -1,16 +1,16 @@
 <?php
 
 /*
- Copyright (C) 2016 - Ward Mundy, Sylvain Boily
+ Copyright (C) 2016-2022 Ward Mundy, Sylvain Boily
  SPDX-License-Identifier: GPL-3.0+
 */
 
-require("/usr/share/php/smarty3/Smarty.class.php");
+require("/usr/local/lib/php/Smarty/Smarty.class.php");
 
 include_once("config/config.inc.php");
 include_once("lib/wazo.php");
 
-$wazo = new Wazo($wazo_host);
+$wazo = new Wazo($wazo_host, $wazo_port);
 $wazo->backend_user = $wazo_backend_user;
 
 $tpl = new Smarty();
@@ -25,11 +25,20 @@ if ($_POST) {
 }
 
 $session = isset($_COOKIE['wazo']['session']) ? $_COOKIE['wazo']['session'] : "";
+$tenant_uuid = isset($_COOKIE['wazo']['tenant_uuid']) ? $_COOKIE['wazo']['tenant_uuid'] : "";
+$wazo->tenant_uuid = $tenant_uuid;
 
 if (!empty($session)) {
     $tpl->assign("displayname", "Incredible root");
     $tpl->assign("uuid", $session);
     $tpl->assign("root_application", $root_application);
+    $obj_tenants = $wazo->list_tenants()->items;
+    $tenants = array();
+    foreach($obj_tenants as $key => $value) {
+        $tenants[$value->uuid] = $value->name;
+    }
+    $tpl->assign("tenants", $tenants);
+    $tpl->assign("tenant_uuid", $tenant_uuid);
 
     $action = '';
     if ($_GET['action']) {
@@ -44,7 +53,7 @@ if (!empty($session)) {
             break;
 
         case 'cdrs':
-            $tpl->assign("cdrs", array_map('str_getcsv', str_getcsv($wazo->get_cdr(), "\n")));
+            $tpl->assign("cdrs", $wazo->get_cdr()->items);
             $tpl->display("tpl/cdrs.html");
             break;
 
