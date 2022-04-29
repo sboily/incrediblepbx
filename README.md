@@ -1,5 +1,7 @@
 # incredible pbx
 
+This is a demo to create a php dashboard on top of wazo-platform. Created with Ward Mundy for fun.
+
 Installation
 ------------
 
