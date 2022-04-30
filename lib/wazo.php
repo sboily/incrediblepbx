@@ -151,7 +151,7 @@ class Wazo {
         $cdrs = $connect->get("cdr?limit=100");
 
         if ($cdrs->info->http_code == 200) {
-            return $cdrs->response;
+            return json_decode($cdrs->response);
         }
         return "Error to get cdrs";
     }
